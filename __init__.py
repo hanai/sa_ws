@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 
 
 def create_app():
@@ -6,6 +7,8 @@ def create_app():
 
     from . import db
     db.init_app(app)
+
+    CORS(app)
 
     return app
 

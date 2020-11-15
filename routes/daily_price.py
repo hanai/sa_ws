@@ -17,4 +17,7 @@ def get_daily_price(symbol):
     session = get_db()['daily_price']
     res = session.query(Model).filter(Model.date >= start_date,
                                       Model.date <= end_date).all()
-    return jsonify([x._asdict() for x in res])
+    res = [x._asdict() for x in res]
+    for i in res:
+        i['date'] = i['date'].strftime('%Y-%m-%d')
+    return jsonify(res)
